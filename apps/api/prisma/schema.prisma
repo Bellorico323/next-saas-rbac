@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String?
+  email        String   @unique
+  passwordHash String?  @map("password_hash")
+  avatarURL    String?  @map("avatar_url")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  tokens   Token[]
+  accounts Account[]
+  invites  Invite[]
+
+  @@map("users")
+}
+
+enum TokenType {
+  PASSWORD_RECOVER
+}
+
+model Token {
+  id        String    @id @default(uuid())
+  type      TokenType
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  @@map("tokens")
+}
+
+enum AccountProvider {
+  GITHUB
+}
+
+model Account {
+  id                String          @id @default(uuid())
+  provider          AccountProvider
+  providerAccountId String          @unique @map("provider_account_id")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  @@unique([provider, userId])
+  @@map("accounts")
+}
+
+model Invite {
+  id        String   @id @default(uuid())
+  email     String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  author User?   @relation(fields: [userId], references: [id])
+  userId String? @map("user_id")
+
+  @@map("invites")
+}
+
+model Member {
+  id String @id @default(uuid())
+
+  @@map("members")
+}
+
+model Organizations {
+  id String @id @default(uuid())
+
+  @@map("organizations")
+}
+
+model Projects {
+  id String @id @default(uuid())
+
+  @@map("projects")
+}
