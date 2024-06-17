@@ -17,9 +17,15 @@ importers:
       '@fastify/cors':
         specifier: ^9.0.1
         version: 9.0.1
+      '@prisma/client':
+        specifier: ^5.15.0
+        version: 5.15.0(prisma@5.15.0)
       '@saas/auth':
         specifier: workspace:*
         version: link:../../packages/auth
+      bcryptjs:
+        specifier: ^2.4.3
+        version: 2.4.3
       fastify:
         specifier: ^4.28.0
         version: 4.28.0
@@ -30,6 +36,9 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
     devDependencies:
+      '@faker-js/faker':
+        specifier: ^8.4.1
+        version: 8.4.1
       '@saas/eslint-config':
         specifier: workspace:*
         version: link:../../config/eslint-config
@@ -39,6 +48,9 @@ importers:
       '@saas/tsconfig':
         specifier: workspace:*
         version: link:../../config/typescript-config
+      '@types/bcryptjs':
+        specifier: ^2.4.6
+        version: 2.4.6
       '@types/node':
         specifier: ^20.14.2
         version: 20.14.2
@@ -260,6 +272,10 @@ packages:
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
+  '@faker-js/faker@8.4.1':
+    resolution: {integrity: sha512-XQ3cU+Q8Uqmrbf2e0cIC/QN43sTBSC8KF12u29Mb47tWrt2hAgBXSgpZMj4Ao8Uk0iJcU99QsOCaIL8934obCg==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
+
   '@fastify/ajv-compiler@3.5.0':
     resolution: {integrity: sha512-ebbEtlI7dxXF5ziNdr05mOY8NnDiPB1XvAlLHctRt/Rc+C3LCOVW5imUVX+mhvUhnNzmPBHewUkOFgGlCxgdAA==}
 
@@ -304,6 +320,15 @@ packages:
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
+  '@prisma/client@5.15.0':
+    resolution: {integrity: sha512-wPTeTjbd2Q0abOeffN7zCDCbkp9C9cF+e9HPiI64lmpehyq2TepgXE+sY7FXr7Rhbb21prLMnhXX27/E11V09w==}
+    engines: {node: '>=16.13'}
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+
   '@prisma/debug@5.15.0':
     resolution: {integrity: sha512-QpEAOjieLPc/4sMny/WrWqtpIAmBYsgqwWlWwIctqZO0AbhQ9QcT6x2Ut3ojbDo/pFRCCA1Z1+xm2MUy7fAkZA==}
 
@@ -327,6 +352,9 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  '@types/bcryptjs@2.4.6':
+    resolution: {integrity: sha512-9xlo6R2qDs5uixm0bcIqCeMCE6HiQsIyel9KQySStiyqNl2tnj2mP3DX1Nf56MD6KMenNNlBBsy3LJ7gUEQPXQ==}
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
@@ -530,6 +558,9 @@ packages:
 
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+
+  bcryptjs@2.4.3:
+    resolution: {integrity: sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==}
 
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -1840,6 +1871,8 @@ snapshots:
 
   '@eslint/js@8.57.0': {}
 
+  '@faker-js/faker@8.4.1': {}
+
   '@fastify/ajv-compiler@3.5.0':
     dependencies:
       ajv: 8.16.0
@@ -1887,6 +1920,10 @@ snapshots:
 
   '@pkgr/core@0.1.1': {}
 
+  '@prisma/client@5.15.0(prisma@5.15.0)':
+    optionalDependencies:
+      prisma: 5.15.0
+
   '@prisma/debug@5.15.0': {}
 
   '@prisma/engines-version@5.15.0-29.12e25d8d06f6ea5a0252864dd9a03b1bb51f3022': {}
@@ -1930,6 +1967,8 @@ snapshots:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
       - supports-color
+
+  '@types/bcryptjs@2.4.6': {}
 
   '@types/json-schema@7.0.15': {}
 
@@ -2187,6 +2226,8 @@ snapshots:
   balanced-match@1.0.2: {}
 
   base64-js@1.5.1: {}
+
+  bcryptjs@2.4.3: {}
 
   brace-expansion@1.1.11:
     dependencies:
