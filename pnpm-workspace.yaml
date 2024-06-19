@@ -2,3 +2,6 @@ packages:
   - "apps/*"
   - "packages/*"
   - "config/*"
+
+pnpm:
+  version: '9.1.1'
