@@ -1,5 +1,3 @@
-import { Button } from '@/components/ui/button'
-
 export default function Home() {
-  return <Button>Sign in</Button>
+  return <h1>Home - Dashboard</h1>
 }
