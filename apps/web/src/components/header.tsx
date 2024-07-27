@@ -20,6 +20,8 @@ export async function Header() {
           src={rocketseatIcon}
           className="size-6 dark:invert"
           alt="rocketseat"
+          height={24}
+          width={24}
         />
 
         <Slash className="size-3 -rotate-[24deg] text-border" />
