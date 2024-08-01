@@ -1,22 +1,24 @@
 import { api } from './api-client'
 
 interface GetBillingResponse {
-  organization: {
-    id: string
-    slug: string
-    name: string
-    domain: string | null
-    shouldAttachUsersByDomain: boolean
-    avatarUrl: string | null
-    createdAt: string
-    updatedAt: string
-    ownerId: string
+  billing: {
+    seats: {
+      amount: number
+      unit: number
+      price: number
+    }
+    projects: {
+      amount: number
+      unit: number
+      price: number
+    }
+    total: number
   }
 }
 
 export async function getBilling(org: string) {
   const result = await api
-    .get(`organizations/${org}`)
+    .get(`organizations/${org}/billing`)
     .json<GetBillingResponse>()
 
   return result
