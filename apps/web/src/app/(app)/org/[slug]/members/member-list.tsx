@@ -1,5 +1,5 @@
 import { organizationSchema } from '@saas/auth'
-import { ArrowLeftRight, Crown } from 'lucide-react'
+import { ArrowLeftRight, Crown, UserMinus } from 'lucide-react'
 import Image from 'next/image'
 
 import { ability, getCurrentOrg } from '@/auth/auth'
@@ -9,6 +9,9 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { getMembers } from '@/http/get-members'
 import { GetMembership } from '@/http/get-membership'
 import { getOrganization } from '@/http/get-organization'
+
+import { removeMemberAction } from './actions'
+import { UpdateMemberRoleSelect } from './update-member-role-select'
 
 export async function MemberList() {
   const currentOrg = getCurrentOrg()
@@ -72,6 +75,33 @@ export async function MemberList() {
                         <ArrowLeftRight className="mr-2 size-4" />
                         Transfer ownerships
                       </Button>
+                    )}
+
+                    <UpdateMemberRoleSelect
+                      memberId={member.id}
+                      value={member.role}
+                      disabled={
+                        member.userId === membership.userId ||
+                        member.userId === organization.ownerId ||
+                        permissions?.cannot('update', 'User')
+                      }
+                    />
+
+                    {permissions?.can('delete', 'User') && (
+                      <form action={removeMemberAction.bind(null, member.id)}>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          type="submit"
+                          disabled={
+                            member.userId === membership.userId ||
+                            member.userId === organization.ownerId
+                          }
+                        >
+                          <UserMinus className="mr-2 size-4" />
+                          Remove
+                        </Button>
+                      </form>
                     )}
                   </div>
                 </TableCell>
