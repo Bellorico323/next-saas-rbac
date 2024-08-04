@@ -1,11 +1,10 @@
-import { FastifyInstance } from 'fastify'
-import { ZodTypeProvider } from 'fastify-type-provider-zod'
-import z from 'zod'
+import type { FastifyInstance } from 'fastify'
+import type { ZodTypeProvider } from 'fastify-type-provider-zod'
+import { z } from 'zod'
 
 import { auth } from '@/http/middleware/auth'
+import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { prisma } from '@/lib/prisma'
-
-import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function acceptInvite(app: FastifyInstance) {
   app
@@ -15,7 +14,7 @@ export async function acceptInvite(app: FastifyInstance) {
       '/invites/:inviteId/accept',
       {
         schema: {
-          tags: ['invites'],
+          tags: ['Invites'],
           summary: 'Accept an invite',
           params: z.object({
             inviteId: z.string().uuid(),
@@ -64,12 +63,12 @@ export async function acceptInvite(app: FastifyInstance) {
 
           prisma.invite.delete({
             where: {
-              id: inviteId,
+              id: invite.id,
             },
           }),
         ])
 
-        return reply.status(204)
+        return reply.status(204).send()
       },
     )
 }
